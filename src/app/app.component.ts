@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { LandingComponent } from './features/landing/landing.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  imports: [LandingComponent],
+  template: `<app-landing />`
 })
-export class AppComponent {
-  title = 'srm-credit-front';
-}
+export class AppComponent {}

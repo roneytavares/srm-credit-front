@@ -1,13 +1,47 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <title>SrmCreditFront</title>
+  <title>SRM Capital - Credit Engine v2</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col justify-between">
+
+  <!-- TOPO INSTITUCIONAL FIXO -->
+  <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 bg-amber-500 rounded flex items-center justify-center font-bold text-slate-950 text-xl tracking-tighter">
+          SRM
+        </div>
+        <div>
+          <span class="text-lg font-bold tracking-wider text-white">SRM CAPITAL</span>
+          <span class="block text-xs text-amber-400 font-mono tracking-widest uppercase">Credit Engine v2</span>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center space-x-8 text-sm text-slate-400">
+        <span class="text-slate-200 font-medium">Mesa de Operações</span>
+        <span class="hover:text-white transition cursor-pointer">Golden Cases (C1-C3)</span>
+        <span class="hover:text-white transition cursor-pointer">DECISIONS.md</span>
+      </nav>
+      <div class="flex items-center space-x-2 bg-emerald-950/50 border border-emerald-800/60 px-3 py-1.5 rounded-full text-xs text-emerald-400 font-mono">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>API Online</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- PONTO DE ENTRADA DO ANGULAR -->
   <app-root></app-root>
+
+  <!-- RODAPÉ GLOBAL -->
+  <footer class="border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-500 font-mono">
+    <p>SRM Asset & Capital — Teste Técnico Credit Engine v2 • Arquitetura Sênior & Clean Code</p>
+  </footer>
+
 </body>
 </html>
