@@ -3,6 +3,8 @@
 Interface web moderna para a mesa de operações da SRM Asset, projetada para a simulação, avaliação e liquidação de propostas de crédito e deságio de recebíveis com suporte a operações *cross-currency* (BRL/USD).
 
 ---
+## 📸 Interface do Frontend
+![Tela Principal do Sistema](./public/print-frontend.png)
 
 ## 🚀 Tecnologias e Stack
 
