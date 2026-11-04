@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  srm-credit-front:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: srm_credit_front_app
+    ports:
+      - "4200:80"
+    restart: always

@@ -1,0 +1,101 @@
+<div class="max-w-6xl mx-auto px-6 py-10 w-full flex-grow bg-white text-slate-800">
+  
+  <!-- Cabeçalho Institucional SRM -->
+  <div class="mb-8 border-b border-slate-200 pb-6">
+    <span class="text-xs font-bold uppercase tracking-widest text-blue-800">SRM Capital &bull; Gestão de Ativos</span>
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900 mt-1">Simulador de Crédito & Deságio</h1>
+    <p class="text-slate-600 text-sm mt-1">Insira os dados do recebível ou selecione um dos Golden Cases para validação direta no motor de crédito.</p>
+  </div>
+
+  <!-- Botões de Atalho para Golden Cases -->
+  <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl mb-8 flex flex-wrap items-center justify-between gap-4 shadow-sm">
+    <span class="text-xs font-bold uppercase text-slate-600 tracking-wider">Carga Rápida de Golden Cases:</span>
+    <div class="flex space-x-2">
+      <button (click)="loadGoldenCase('C1')" class="px-4 py-1.5 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold rounded-md transition border border-slate-300 shadow-sm">
+        Caso C1
+      </button>
+      <button (click)="loadGoldenCase('C2')" class="px-4 py-1.5 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold rounded-md transition border border-slate-300 shadow-sm">
+        Caso C2
+      </button>
+      <button (click)="loadGoldenCase('C3')" class="px-4 py-1.5 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold rounded-md transition border border-slate-300 shadow-sm">
+        Caso C3
+      </button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    
+    <!-- Formulário de Entrada -->
+    <div class="lg:col-span-7 bg-white border border-slate-200 p-6 rounded-xl shadow-sm space-y-6">
+      <h2 class="text-base font-bold text-slate-900 border-b border-slate-100 pb-3 uppercase tracking-wider text-xs">
+        Parâmetros do Recebível
+      </h2>
+
+      <div>
+        <label class="block text-xs font-semibold uppercase text-slate-600 mb-2">Valor de Face (R$)</label>
+        <input type="number" [ngModel]="faceValue()" (ngModelChange)="faceValue.set($event)" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 font-mono text-lg font-semibold">
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-semibold uppercase text-slate-600 mb-2">Prazo (Meses)</label>
+          <input type="number" [ngModel]="termMonths()" (ngModelChange)="termMonths.set($event)" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 font-mono">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold uppercase text-slate-600 mb-2">Taxa de Desconto / Mês (%)</label>
+          <input type="number" step="0.01" [ngModel]="discountRate()" (ngModelChange)="discountRate.set($event)" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 font-mono">
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold uppercase text-slate-600 mb-2">Tipo de Ativo</label>
+        <select [ngModel]="assetType()" (ngModelChange)="assetType.set($event)" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium">
+          <option value="DUPLICATA">Duplicata Comercial</option>
+          <option value="CHEQUE">Cheque Pré-datado</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Card de Resultados Retornados pelo Backend -->
+    <div class="lg:col-span-5 bg-gradient-to-b from-blue-900 to-slate-900 text-white p-6 rounded-xl flex flex-col justify-between shadow-lg border border-blue-900">
+
+      <div>
+        <h2 class="text-sm font-semibold text-blue-100 border-b border-blue-800/80 pb-3 flex items-center justify-between">
+          <span class="uppercase tracking-wider">Resultado da Operação (API)</span>
+          <span class="text-[10px] bg-blue-800/60 text-blue-200 border border-blue-700/50 px-2 py-0.5 rounded font-mono">HALF_EVEN</span>
+        </h2>
+        
+        <!-- Aviso de Solicitação Efetuada com Sucesso -->
+        @if (successMessage()) {
+          <div class="my-4 p-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-xl text-sm font-medium flex items-center justify-between shadow-sm animate-fade-in">
+            <span>{{ successMessage() }}</span>
+            <button (click)="successMessage.set(null)" class="text-emerald-400 hover:text-emerald-300 font-bold px-2">&times;</button>
+          </div>
+        }
+
+        <div class="mt-6 space-y-6">
+          <div>
+            <span class="text-xs uppercase tracking-wider text-blue-200/80 font-medium">Limite Aprovado (Backend)</span>
+            <div class="text-3xl font-extrabold text-white font-mono mt-1">
+              {{ (latestResponse()?.approvedLimit ?? 0) | currency:(latestResponse()?.targetCurrency ?? 'BRL'):'symbol':'1.2-2' }}
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-blue-800/60">
+            <span class="text-xs uppercase tracking-wider text-blue-200/80 font-medium">Status da Proposta</span>
+            <div class="text-xl font-bold text-blue-100 font-mono mt-1">
+              {{ latestResponse()?.status ?? 'AGUARDANDO ENVIO' }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-4 border-t border-blue-800/60">
+        <button (click)="simulate()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow-md tracking-wider uppercase text-xs">
+          Efetuar Liquidação na API
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
