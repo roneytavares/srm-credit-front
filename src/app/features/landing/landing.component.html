@@ -7,21 +7,52 @@
     <p class="text-slate-600 text-sm mt-1">Insira os dados do recebível ou selecione um dos Golden Cases para validação direta no motor de crédito.</p>
   </div>
 
-  <!-- Botões de Atalho para Golden Cases -->
-  <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl mb-8 flex flex-wrap items-center justify-between gap-4 shadow-sm">
-    <span class="text-xs font-bold uppercase text-slate-600 tracking-wider">Carga Rápida de Golden Cases:</span>
-    <div class="flex space-x-2">
-      <button (click)="loadGoldenCase('C1')" class="px-4 py-1.5 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold rounded-md transition border border-slate-300 shadow-sm">
-        Caso C1
+ <!-- Botões de Atalho para Golden Cases -->
+<div class="bg-slate-50 border border-slate-200 p-4 rounded-xl mb-8 shadow-sm">
+  <span class="block text-xs font-bold uppercase text-slate-600 tracking-wider mb-3">
+    Carga Rápida de Golden Cases: Clique para carregar os valores predeterminados!
+  </span>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+    <!-- Caso C1 -->
+    <div class="bg-white p-3 rounded-lg border border-slate-200 flex flex-col justify-between shadow-2xs">
+      <div class="mb-2 text-xs">
+        <span class="block font-bold text-indigo-600 mb-1">Caso C1</span>
+        <p class="text-slate-600 leading-snug">Duplicata de Médio/Alto Valor — R$ 100.000,00 | Prazo: 3 meses | Taxa: 1.5% a.m.</p>
+      </div>
+      <button (click)="loadGoldenCase('C1')" class="w-full mt-2 px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-md transition border border-indigo-200 cursor-pointer">
+        Carregar C1
       </button>
-      <button (click)="loadGoldenCase('C2')" class="px-4 py-1.5 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold rounded-md transition border border-slate-300 shadow-sm">
-        Caso C2
+    </div>
+
+    <!-- Caso C2 -->
+    <div class="bg-white p-3 rounded-lg border border-slate-200 flex flex-col justify-between shadow-2xs">
+      <div class="mb-2 text-xs">
+        <span class="block font-bold text-indigo-600 mb-1">Caso C2</span>
+        <p class="text-slate-600 leading-snug">Cheque Pré-datado de Curto Prazo — R$ 25.000,00 | Prazo: 2 meses | Taxa: 2.5% a.m.</p>
+      </div>
+      <button (click)="loadGoldenCase('C2')" class="w-full mt-2 px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-md transition border border-indigo-200 cursor-pointer">
+        Carregar C2
       </button>
-      <button (click)="loadGoldenCase('C3')" class="px-4 py-1.5 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold rounded-md transition border border-slate-300 shadow-sm">
-        Caso C3
+    </div>
+
+    <!-- Caso C3 -->
+    <div class="bg-white p-3 rounded-lg border border-slate-200 flex flex-col justify-between shadow-2xs">
+      <div class="mb-2 text-xs">
+        <span class="block font-bold text-indigo-600 mb-1">Caso C3</span>
+        <p class="text-slate-600 leading-snug">Duplicata Alternativa — R$ 100.000,00 | Prazo: 3 meses | Taxa: 1.5% a.m.</p>
+      </div>
+      <button (click)="loadGoldenCase('C3')" class="w-full mt-2 px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-md transition border border-indigo-200 cursor-pointer">
+        Carregar C3
       </button>
     </div>
   </div>
+
+  <!-- Exibição dinâmica da descrição do caso ativo -->
+  <div class="text-xs text-indigo-700 bg-indigo-50 border border-indigo-100 px-3 py-2 rounded-lg font-medium">
+    ℹ️ <span class="font-semibold">Ativo:</span> {{ activeCaseDescription() }}
+  </div>
+</div>
 
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
     

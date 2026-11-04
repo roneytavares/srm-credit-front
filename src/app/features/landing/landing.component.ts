@@ -24,6 +24,9 @@ export class LandingComponent {
   
   // Sinal para controlar a exibição da mensagem de sucesso
   successMessage = signal<string | null>(null);
+  
+  // Novo Signal para a descrição do caso ativo
+  activeCaseDescription = signal<string>('Selecione um Golden Case acima para carregar os parâmetros predeterminados.');
 
   loadGoldenCase(caseName: string) {
     this.successMessage.set(null);
@@ -32,16 +35,19 @@ export class LandingComponent {
       this.termMonths.set(3);
       this.discountRate.set(1.5);    // Corrigido para 1.5% (spread da Duplicata)
       this.assetType.set('DUPLICATA');
+      this.activeCaseDescription.set('Caso C1: Duplicata de Médio/Alto Valor — R$ 100.000,00 | Prazo: 3 meses | Taxa: 1.5% a.m.');
     } else if (caseName === 'C2') {
       this.faceValue.set(25000.00);  // Corrigido para 25.000,00 conforme C2
       this.termMonths.set(2);        // Corrigido para 2 meses
       this.discountRate.set(2.5);    // 2.5% (spread do Cheque Pré-datado)
       this.assetType.set('CHEQUE');
+      this.activeCaseDescription.set('Caso C2: Cheque Pré-datado de Curto Prazo — R$ 25.000,00 | Prazo: 2 meses | Taxa: 2.5% a.m.');
     } else if (caseName === 'C3') {
       this.faceValue.set(100000.00); // Corrigido para 100.000,00 conforme C3
       this.termMonths.set(3);
       this.discountRate.set(1.5);
       this.assetType.set('DUPLICATA');
+      this.activeCaseDescription.set('Caso C3: Duplicata com Parâmetros Alternativos — R$ 100.000,00 | Prazo: 3 meses | Taxa: 1.5% a.m.');
     }
     this.simulate(caseName);
   }
